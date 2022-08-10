@@ -20,8 +20,13 @@ router.get('/settings', (request, response) => {
 
 
 router.post('/orderby',(request, response) => {
-    console.log(request.body.fullname);
-    console.log(request.body.designation);
+
+    const { fullname, designation, status } = request.body;
+    console.log(fullname);
+    console.log(status);
+
+
+
     
     // response.json({Message:request.body})
     // response.send('falana dimkana');
