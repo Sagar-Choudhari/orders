@@ -13,8 +13,8 @@ const orderby = new mongoose.Schema({
         type:Boolean,
         required:true
     }
-})
+});
 
- const Oby = mongoose.model('ordersBy','orderby');
+ const Oby = mongoose.model('ordersbies',orderby);
 
  module.exports = Oby;
