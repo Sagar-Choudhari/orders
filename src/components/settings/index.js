@@ -1,0 +1,9 @@
+export {default as Profile} from './comp/Profile';
+export {default as Users} from './comp/Users';
+export {default as Orderby} from './comp/Orderby';
+export {default as Customers} from './comp/Customers';
+export {default as Addcust} from './comp/Addcust';
+export {default as Products} from './comp/Products';
+export {default as Category} from './comp/Category';
+export {default as Cushion} from './comp/Cushion';
+export {default as Frame} from './comp/Frame';
