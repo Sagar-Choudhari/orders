@@ -1,6 +1,7 @@
 const { response } = require('express');
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcryptjs');
 
 require('../db/conn');
 const Oby = require('../models/orderby');
@@ -110,9 +111,9 @@ router.post('/login', async (request, response) => {
     // console.log(request.body);
     // response.json({ message:'success' });
     try{
-        const {fullname, developer} = request.body;
+        const {fullname, designation} = request.body;
 
-        if(!fullname){
+        if(!fullname || !designation){
             return response.status(400).json({error:"plz filled the data"});
         }
 
@@ -120,11 +121,29 @@ router.post('/login', async (request, response) => {
 
         // console.log(login);
 
-        if (!login){
-            response.status(400).json({ error: "login error" });
-        } else {
-            response.json({ message: "login success" });
+        if (login) {
+        // // decrypting data to match password
+        // const isMatch = await bcrypt.compare(designation, login.designation);
+        
+        
+        // // dont decrypt
+        let isMatch = false;
+        if (designation == login.designation){
+            isMatch = true;
         }
+
+        // if (!login) {
+        if (!isMatch) {
+                response.status(400).json({ error: "login error" });
+            } else {
+                response.json({ message: "login success" });
+            }
+        } else {
+            response.status(400).json({ error: "invalid crediential" });
+        }
+
+
+        
 
     } catch (err) {
         console.log(err);
