@@ -69,7 +69,7 @@ router.get('/settings', (request, response) => {
 
 
 //async await
-router.post('/orderby',async (request, response) => {
+router.post('/regorderby',async (request, response) => {
 
     const { fullname, designation, status } = request.body;
     // console.log(fullname);

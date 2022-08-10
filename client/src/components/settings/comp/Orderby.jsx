@@ -1,7 +1,55 @@
-import React from 'react';
+import React, {useState} from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
 
+
 const Orderby = () => {
+
+  const navigate = useNavigate();
+
+  const [oby, setOby] = useState({
+    fullname:"",
+    designation:""
+  });
+
+  let name, value;
+
+  const handleInputs = (events) => {
+    console.log(events);
+    name = events.target.name;
+    value = events.target.value;
+
+    setOby({...oby, [name]:value});
+  }
+
+  const PostData = async (event) => {
+    event.preventDefault();
+
+    const { fullname, designation } = oby;
+
+    const response = await fetch("/regorderby", {
+      method:"POST",
+      headers: {
+        "Content-Type" : "application/json"
+      },
+      body: JSON.stringify({
+        fullname,
+        designation
+      })
+    });
+
+    const data = await response.json();
+
+    if(data.status === 422 || !data) {
+        window.alert("Invalid Data :|");
+        console.log("Invalid Data :|");
+    } else {
+      window.alert("Data added successfully :)");
+      console.log("Data added successfully :)");
+    }
+    navigate.push('/');
+  }
+
   return (
   <div className="orderby">
     <div className="container-fluid page-body-wrapper">
@@ -26,16 +74,31 @@ const Orderby = () => {
             <div className='col-6 mt-4'>
               <div className='container'>
                 <div className=''>
-                  <form action="#" method="post" className='form'>
+                  <form method="POST" className='form'>
                     <div className='form-group'>
                       <label for="" className="form-label text-left"> Fullname </label>
-                      <input type="text" className="text-left form-control form-control-sm border-secondary" name="fullname" id="" placeholder="Enter Fullname" />
+                      <input 
+                        type="text" 
+                        className="text-left form-control form-control-sm border-secondary" 
+                        name="fullname" 
+                        id="" 
+                        placeholder="Enter Full Name" 
+                        value={oby.fullname}
+                        onChange={handleInputs}
+                      />
                     </div>
                     <div className='form-group'>
                       <label for="text" className='form-label text-left'> Designation </label>
-                      <input type='text' className="text-left form-control form-control-sm border-secondary" name='designation' placeholder='Enter Designation' id=""/>
+                      <input type='text' 
+                        className="text-left form-control form-control-sm border-secondary" 
+                        name='designation' 
+                        placeholder='Enter Designation' 
+                        id=""
+                        value={oby.designation}
+                        onChange={handleInputs}
+                      />
                     </div>
-                    <input type='submit' className="btn btn-primary submit" name='submit' />
+                    <input type='submit' className="btn btn-primary submit" name='submit' onClick={PostData}/>
                     </form>
                 </div>
               </div>
