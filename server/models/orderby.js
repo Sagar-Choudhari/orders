@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
@@ -13,7 +14,15 @@ const orderby = new mongoose.Schema({
     status:{
         type:Boolean,
         required:true
-    }
+    },
+    tokens: [
+        {
+            token: {
+                type:String,
+                required:true
+            }
+        }
+    ]
 });
 
  //hashing data
@@ -25,6 +34,20 @@ const orderby = new mongoose.Schema({
 //     }
 //     next();
 //  });
+
+
+//generating token jwt
+orderby.methods.generateAuthToken = async function () {
+    try {
+        let tokenNext = jwt.sign({ _id:this._id }, process.env.SECRET_KEY);
+        this.tokens = this.tokens.concat({ token: tokenNext });
+        await this.save();
+        return tokenNext;
+
+    } catch (err) {
+        console.log(err);
+    }
+}
 
 
  const Oby = mongoose.model('ordersbies',orderby);

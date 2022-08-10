@@ -1,7 +1,9 @@
+const jwt = require('jsonwebtoken');
 const { response } = require('express');
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
+
 
 require('../db/conn');
 const Oby = require('../models/orderby');
@@ -111,6 +113,8 @@ router.post('/login', async (request, response) => {
     // console.log(request.body);
     // response.json({ message:'success' });
     try{
+        let token; 
+
         const {fullname, designation} = request.body;
 
         if(!fullname || !designation){
@@ -131,6 +135,17 @@ router.post('/login', async (request, response) => {
         if (designation == login.designation){
             isMatch = true;
         }
+
+
+        token = await login.generateAuthToken();
+        // console.log(token);
+
+        response.cookie("jwt", token, {
+            expires:new Date(Date.now() + 86400000),
+            httpOnly:true
+        });
+
+
 
         // if (!login) {
         if (!isMatch) {
