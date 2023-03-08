@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Topbar from './container/topbar/Topbar';
 import {Dashboard, Order, Dispatch, Production, Stock, Report, Settings} from './components/index';
 import {Profile, Users, Orderby, Customers, Addcust, Products, Category, Cushion, Frame} from './components/settings/index';
@@ -16,26 +16,26 @@ const App = () => {
       <Topbar />
       <div class="container-fluid page-body-wrapper">
 			  <div class="main-panel">
-          <Routes>
-            <Route exact path="/" element={<Dashboard/>} />
-            <Route exact path="/order" element={<Order/>} />
-            <Route exact path="/order/neworder" element={<NewOrder/>} />
-            <Route exact path="/dispatch" element={<Dispatch/>} />
-            <Route exact path="/production" element={<Production/>} />
-            <Route exact path="/stock" element={<Stock/>} />
-            <Route exact path="/report" element={<Report/>} />
-            {/* <Route exact path="/sample" element={<Sample} /> */}
-            <Route exact path="/settings" element={<Settings/>} />
-            <Route exact path="/settings/profile" element={<Profile/>} />
-            <Route exact path="/settings/users" element={<Users/>} />
-            <Route exact path="/settings/orderby" element={<Orderby/>} />
-            <Route exact path="/settings/customers" element={<Customers/>} />
-            <Route exact path="/settings/addcust" element={<Addcust/>} />
-            <Route exact path="/settings/products" element={<Products/>} />
-            <Route exact path="/settings/category" element={<Category/>} />
-            <Route exact path="/settings/cushion" element={<Cushion/>} />
-            <Route exact path="/settings/frame" element={<Frame/>} />
-          </Routes>
+          <Switch>
+            <Route exact path="/" component={<Dashboard/>} />
+            <Route exact path="/order" component={<Order/>} />
+            <Route exact path="/order/neworder" component={<NewOrder/>} />
+            <Route exact path="/dispatch" component={<Dispatch/>} />
+            <Route exact path="/production" component={<Production/>} />
+            <Route exact path="/stock" component={<Stock/>} />
+            <Route exact path="/report" component={<Report/>} />
+            {/* <Route exact path="/sample" component={<Sample} /> */}
+            <Route exact path="/settings" component={<Settings/>} />
+            <Route exact path="/settings/profile" component={<Profile/>} />
+            <Route exact path="/settings/users" component={<Users/>} />
+            <Route exact path="/settings/orderby" component={<Orderby/>} />
+            <Route exact path="/settings/customers" component={<Customers/>} />
+            <Route exact path="/settings/addcust" component={<Addcust/>} />
+            <Route exact path="/settings/products" component={<Products/>} />
+            <Route exact path="/settings/category" component={<Category/>} />
+            <Route exact path="/settings/cushion" component={<Cushion/>} />
+            <Route exact path="/settings/frame" component={<Frame/>} />
+          </Switch>
         </div>
       </div>
       <Footer />

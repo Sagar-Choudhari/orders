@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { Table } from 'react-bootstrap';
+import { useHistory } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 
 const Orderby = () => {
-
   const navigate = useNavigate();
+  // const navigate = useHistory();
 
   const [oby, setOby] = useState({
+    status:"",
     fullname:"",
     designation:""
   });
@@ -25,7 +26,7 @@ const Orderby = () => {
   const PostData = async (event) => {
     event.preventDefault();
 
-    const { fullname, designation } = oby;
+    const { status, fullname, designation } = oby;
 
     const response = await fetch("/regorderby", {
       method:"POST",
@@ -33,11 +34,13 @@ const Orderby = () => {
         "Content-Type" : "application/json"
       },
       body: JSON.stringify({
+        status,
         fullname,
         designation
       })
     });
 
+    
     const data = await response.json();
 
     if(data.status === 422 || !data) {
@@ -75,6 +78,11 @@ const Orderby = () => {
               <div className='container'>
                 <div className=''>
                   <form method="POST" className='form'>
+                  <input type='hidden'
+                        name='status' 
+                        value={oby.true}
+                        onChange={handleInputs}
+                      />
                     <div className='form-group'>
                       <label for="" className="form-label text-left"> Fullname </label>
                       <input 
