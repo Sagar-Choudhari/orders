@@ -8,7 +8,7 @@ function App() {
       <BrowserRouter>
         <div>
           <div>
-            <Routes>
+            {/* <Routes>
             <Route path="/" element={< />}>
               <Route index element={< />} />
               <Route path="teams" element={<Teams />}>
@@ -17,7 +17,7 @@ function App() {
                 <Route index element={<LeagueStandings />} />
               </Route>
             </Route>
-            </Routes>
+            </Routes> */}
           </div>
         </div>
       </BrowserRouter>

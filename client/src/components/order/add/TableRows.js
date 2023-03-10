@@ -1,3 +1,5 @@
+import React from 'react'
+
 function TableRows({rowsData, deleteTableRows, handleChange}) {
 
 

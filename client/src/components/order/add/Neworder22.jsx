@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import OrderBy from '../Select.jsx';
 import CreatableSingle from '../Select2.tsx';
 

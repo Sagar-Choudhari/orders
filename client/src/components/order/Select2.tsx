@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import CreatableSelect from 'react-select/creatable';
-import { GroupedOption, groupedOptions } from './data/SelectData.tsx';
+import { GroupedOption, groupedOptions } from './data/SelectData';
 import { ActionMeta, OnChangeValue } from 'react-select';
 
 export default class CreatableSingle extends Component {
@@ -24,7 +24,7 @@ export default class CreatableSingle extends Component {
     return (
       <CreatableSelect
         isClearable
-        onChange={this.handleChange}
+        // onChange={this.handleChange}
         onInputChange={this.handleInputChange}
         options={groupedOptions}
         formatCreateLabel={()=> undefined}
