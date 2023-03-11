@@ -7,7 +7,6 @@ import {Profile, Users, Orderby, Customers, Addcust, Products, Category, Cushion
 import Footer from './container/footer/Footer';
 import NewOrder from './components/order/add/Neworder';
 
-//npx browserslist@latest --update-db
 const App = () => {
   return (
   <div className="App">
